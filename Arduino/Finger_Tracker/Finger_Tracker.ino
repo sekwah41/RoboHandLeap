@@ -42,11 +42,11 @@ void setPos(int fingerId, int angle) {
   if (fingerId < 0 && fingerId > servos) {
     return;
   }
-  if (angle < 0) {
-    angle = 0;
+  if (angle < minAngle) {
+    angle = minAngle;
   }
-  else if (angle > 179) {
-    angle = 179;
+  else if (angle > maxAngle) {
+    angle = maxAngle;
   }
   finger[fingerId].write(angle);
 
