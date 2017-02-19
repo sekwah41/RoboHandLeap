@@ -3,7 +3,10 @@
 // 0-4 fingers 5 for thumb pinkie first to index. (use right hand left to right when facing towards you)
 Servo finger[5];
 // Max angle is 179 (dont try 180...)
-int angle = 1;
+
+// Data for the fingers (May need to treat thumb differently)
+const int minAngle = 20;
+const int maxAngle = 150;
 
 void setup() {
   finger[0].attach(3);
@@ -28,6 +31,10 @@ void setup() {
   Serial.println("Init");
   //delay(10000);
 
+}
+
+void setPos(){
+  
 }
 
 void loop() {

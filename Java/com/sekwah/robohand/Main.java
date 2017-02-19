@@ -5,8 +5,9 @@ package com.sekwah.robohand;
  */
 public class Main {
 
-    public static void main(String[] args){
-
+    public static void main(String[] args) throws Exception {
+        new RoboHand();
+        System.out.println("Started");
     }
 
 }
