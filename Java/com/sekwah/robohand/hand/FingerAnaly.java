@@ -21,6 +21,9 @@ public class FingerAnaly {
 
             total += anglePoints(finger, Finger.Joint.JOINT_DIP, Finger.Joint.JOINT_PIP, Finger.Joint.JOINT_MCP);
 
+            //total += anglePoints(finger.jointPosition(Finger.Joint.JOINT_PIP), finger.jointPosition(Finger.Joint.JOINT_MCP), palm);
+
+
         }/*
         Vector vec = finger.jointPosition(Finger.Joint.JOINT_TIP).minus(finger.jointPosition(Finger.Joint.JOINT_DIP));
         Vector vec2 = finger.jointPosition(Finger.Joint.JOINT_PIP).minus(finger.jointPosition(Finger.Joint.JOINT_DIP));*/
@@ -28,13 +31,9 @@ public class FingerAnaly {
         total += anglePoints(finger, Finger.Joint.JOINT_TIP, Finger.Joint.JOINT_DIP, Finger.Joint.JOINT_PIP);
 
         return total / div;
-        /*Vector vec = finger.jointPosition(Finger.Joint.JOINT_DIP).minus(finger.jointPosition(Finger.Joint.JOINT_PIP));
-        Vector vec2 = finger.jointPosition(Finger.Joint.JOINT_MCP).minus(finger.jointPosition(Finger.Joint.JOINT_PIP));
-        return (float) Math.toDegrees(angle(vec, vec2));*/
-        //finger.jointPosition(Joint.)
     }
 
-    public static float anglePoints(Finger finger, Finger.Joint joint1,  Finger.Joint joint2,  Finger.Joint joint3){
+    /*public static float anglePoints(Finger finger, Finger.Joint joint1,  Finger.Joint joint2,  Finger.Joint joint3){
         Vector vec = finger.jointPosition(joint1).minus(finger.jointPosition(joint2));
         Vector vec2 = finger.jointPosition(joint3).minus(finger.jointPosition(joint2));
 
@@ -49,6 +48,20 @@ public class FingerAnaly {
 
     private static float getLength(Vector vec) {
         return (float) Math.sqrt(vec.getX() * vec.getX() + vec.getY() * vec.getY() + vec.getZ() * vec.getZ());
+    }*/
+
+    public static float anglePoints(Finger finger, Finger.Joint joint1,  Finger.Joint joint2,  Finger.Joint joint3){
+        return finger.jointPosition(joint1).minus(finger.jointPosition(joint2))
+                .angleTo(finger.jointPosition(joint3).minus(finger.jointPosition(joint2)));
+    }
+
+    public static float anglePoints(Vector joint1,  Vector joint2,  Vector joint3){
+        return joint1.minus(joint2)
+                .angleTo(joint3.minus(joint2));
+    }
+
+    public static float angle(Vector vec1, Vector vec2){
+        return vec1.angleTo(vec2);
     }
 
 }
