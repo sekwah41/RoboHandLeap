@@ -34487,6 +34487,7 @@ webpackJsonp([24], [, , , , function(t, e, i) {
             console.error("dont call ImageProxy.getURL")
         },
         findFormat: function(t) {
+			t = "RGBA";
             if ("N" === t) {
                 var e = i.i(n.filter)(this.get("images"), function(e) {
                     var n = e.options && e.options.format === t && e.options.quality;
@@ -48593,7 +48594,7 @@ webpackJsonp([24], [, , , , function(t, e, i) {
             this._stateSet && this.setStateSetAlphaBlending()
         },
         disableTransparency: function() {
-            this._stateSet && this.setStateSetAlphaBlending()
+            this._stateSet && this.setStateSetOpaque()
         },
         setStateSetAlphaBlending: function() {
             this._stateSet && (this._stateSet.setRenderBinDetails(o.a.TRANSPARENT_BIN, "DepthSortedBin"),
@@ -56211,7 +56212,6 @@ webpackJsonp([24], [, , , , function(t, e, i) {
         this._inter = h.create(),
         g.call(this)
     };
-	console.log("TestENABLED");
     S.prototype = _.objectInherit(g.prototype, {
         setTestPlane: function(t) {
             this._testPlane = t
@@ -72072,7 +72072,7 @@ webpackJsonp([24], [, , , , function(t, e, i) {
             var u = n && n.vertexColor;
             u && (this.set("vertexColorEnable", u.enable),
             this.set("vertexColorColorSpace", u.colorSpace),
-            void 0 !== u.useAlpha && this.set("vertexAlphaEnable", true));
+            void 0 !== u.useAlpha && this.set("vertexAlphaEnable", u.useAlpha));
             var h = i.i(s.a)().blending;
             void 0 !== h && (this.set("style", "blending"),
             this.set("blendingPauseDuration", Math.abs(h))),
@@ -72097,7 +72097,7 @@ webpackJsonp([24], [, , , , function(t, e, i) {
                     renderer: this.get("renderer"),
                     vertexColor: {
                         enable: this.get("vertexColorEnable"),
-                        useAlpha: true,
+                        useAlpha: this.get("vertexAlphaEnable"),
                         colorSpace: this.get("vertexColorColorSpace")
                     }
                 },
@@ -72115,7 +72115,7 @@ webpackJsonp([24], [, , , , function(t, e, i) {
             return t.shading && (o.a.isEnumString(t.shading.type, ["lit", "shadeless", "matcap", "blending"]) || e.push("ShadingStyle.editorSetJSON shading.style must be an enum in [lit, shadeless,matcap]"),
             o.a.isEnumString(t.shading.renderer, ["classic", "pbr"]) || e.push("ShadingStyle.editorSetJSON shading.renderer must be an enum in [classic, pbr]"),
             t.shading.vertexColor && (o.a.isBoolean(t.shading.vertexColor.enable) || e.push("ShadingStyle.editorSetJSON shading.vertexColor.enable must be boolean"),
-            o.a.isBoolean(true) || e.push("ShadingStyle.editorSetJSON shading.vertexColor.useAlpha must be boolean"),
+            o.a.isBoolean(t.shading.vertexColor.useAlpha) || e.push("ShadingStyle.editorSetJSON shading.vertexColor.useAlpha must be boolean"),
             o.a.isEnumString(t.shading.vertexColor.colorSpace, ["srgb", "linear"]) || e.push("ShadingStyle.editorSetJSON shading.vertexColor.colorSpace must be an enum with value in [ srgb, linear ]"))),
             t.wireframe && (o.a.isBoolean(t.wireframe.enable) || e.push("ShadingStyle.editorSetJSON wireframe.enable must be boolean"),
             o.a.isString(t.wireframe.color) || e.push("ShadingStyle.editorSetJSON wireframe.color must be a string like 000000FF")),
@@ -72129,7 +72129,7 @@ webpackJsonp([24], [, , , , function(t, e, i) {
             return t.shading && (t.shading.type && (i.style = t.shading.type),
             t.shading.renderer && (i.renderer = t.shading.renderer),
             t.shading.vertexColor && (i.vertexColorEnable = t.shading.vertexColor.enable,
-            i.vertexAlphaEnable = true,
+            i.vertexAlphaEnable = t.shading.vertexColor.useAlpha,
             i.vertexColorColorSpace = t.shading.vertexColor.colorSpace)),
             t.wireframe && (i.wireframeEnable = t.wireframe.enable,
             i.wireframeColor = t.wireframe.color),
